@@ -12,6 +12,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/getweather', function(req, res) {
+    
     // console.log(req.params.lat, req.params.long)
     // console.log(req.query);
     // console.log();
