@@ -106,6 +106,8 @@
         justify-content: center;
         justify-items: center;
         font-weight: 600;
+        width: 100%;
+
     }
     
     scroll-flex item span:first-of-type {
@@ -202,7 +204,7 @@
     
     wrapped-sections {
         display: block;
-        min-height: 7em;
+        min-height: 10em;
     }
     
     img-wrap {
@@ -235,7 +237,7 @@
     <content-wrapper style="pointer-events: none;">
         <content id="ux">
             <card-wrapper>
-                <card style="margin-left: 3em;">
+                <card id="cardinfo" style="margin-left: 3em;">
                     <label>Odin-Weather</label><br>
                     <title>30 C 31 / 23</title><br>
                     <label>Octubre 11, 2019</label><br>
@@ -246,99 +248,36 @@
 
                     <wrapped-sections style="position: relative;">
 
-                        <scroll-flex class="active" style="pointer-events: all;">
+                        <scroll-flex id="firstfivedays" class="active" style="pointer-events: all;">
                             <item>
                                 <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 47.svg"></img-wrap>
+                                <span style="margin:1rem 0;;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
                                 <span>6 AM</span>
                             </item>
                             <item>
                                 <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 47.svg"></img-wrap>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
                                 <span>7 AM</span>
                             </item>
                             <item>
                                 <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 47.svg"></img-wrap>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
                                 <span>8 AM</span>
                             </item>
                             <item>
                                 <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 47.svg"></img-wrap>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
                                 <span>9 AM</span>
                             </item>
                             <item>
                                 <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 47.svg"></img-wrap>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
                                 <span>10 AM</span>
-                            </item>
-                        </scroll-flex>
-                        <scroll-flex class="" style="pointer-events: all;">
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 48.svg"></img-wrap>
-                                <span>11 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 48.svg"></img-wrap>
-                                <span>12 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 48.svg"></img-wrap>
-                                <span>1 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 48.svg"></img-wrap>
-                                <span>2 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 48.svg"></img-wrap>
-                                <span>3 PM</span>
-                            </item>
-                        </scroll-flex>
-                        <scroll-flex class="" style="pointer-events: all;">
-                            <item>
-                                <span>30 C</span>
-
-                                <img-wrap><img width="38" src="./svg/group 45.svg"></img-wrap>
-                                <span>4 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 45.svg"></img-wrap>
-                                <span>5 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 45.svg"></img-wrap>
-                                <span>6 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 45.svg"></img-wrap>
-                                <span>7 PM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <img-wrap><img width="38" src="./svg/group 45.svg"></img-wrap>
-                                <span>8 PM</span>
                             </item>
                         </scroll-flex>
 
                     </wrapped-sections>
 
-                    <carded-grid>
-
-                        <item><span>30 C</span><span>Feels Like</span><span>39 C</span></item>
-                        <item><span>30 C</span><span>Humidity</span><span>83 %</span></item>
-                        <item><span>30 C</span><span>Dew Point</span><span>27 C</span></item>
-
-
-                    </carded-grid>
                     <button-grid>
                         <input type="button" value="close" style="font-weight: 600;">
                         <input type="button" value="reset" style="font-weight: 600;">
@@ -417,9 +356,10 @@
     let resultscontainer = document.querySelector("card > state.ready");
 
     let initialindex = 0;
+    var placeselected = "";
     var list = document.querySelectorAll('wrapped-sections > scroll-flex');
     var map;
-    var timer = setInterval(nextSectionWeather, 3000);
+    // var timer = setInterval(nextSectionWeather, 3000);
 
 
     function nextSectionWeather() {
@@ -451,8 +391,9 @@
     }
 
     function codeAddress(place_id) {
+
         document.querySelector(".search-results").classList.toggle("active");
-        
+
         geocoder.geocode({
             placeId: place_id
         }, function(results, status) {
@@ -499,6 +440,7 @@
             let item = document.createElement('item');
 
             item.addEventListener('click', () => {
+                placeselected = prediction.description;
                 codeAddress(prediction.place_id);
             })
 
@@ -575,26 +517,75 @@
         }
     })
 
-    const fetchWeather = ({lat,lng}) => {
+    const fetchWeather = ({
+        lat,
+        lng
+    }) => {
         debugger;
         var data = null;
 
         var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
 
         xhr.addEventListener("readystatechange", function() {
+
             if (this.readyState === this.DONE) {
+                debugger;
+                let data = JSON.parse(this.responseText).data;
                 console.log(JSON.parse(this.responseText));
+
+                let card = `
+                    <label>Odin-Weather</label><br>
+                    <title>${data[0].temp} ${data[0].max_temp} C / ${data[0].low_temp} C</title><br>
+                    <label>${data[0].valid_date}</label><br>
+                    <label>${placeselected}</label><br>
+                    <label>${data[0].weather.description}</label><br>
+                    <title>Today - ${data[0].weather.description}. Hight ${data[0].max_temp} C low ${data[0].low_temp} C, ${data[0].weather.description}.</title><br>
+
+                    <wrapped-sections style="position: relative;">
+
+                        <scroll-flex id="firstfivedays" class="active" style="pointer-events: all;">
+                            <item>
+                                <span>${data[0].temp} C</span>
+                                <span style="margin:1rem 0;;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
+                                <span>Today</span>
+                            </item>
+                            <item>
+                                <span>${data[1].temp} C</span>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
+                                <span>Tomorrow</span>
+                            </item>
+                            <item>
+                                <span>${data[2].temp} C</span>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
+                                <span>+ 1</span>
+                            </item>
+                            <item>
+                                <span>${data[3].temp} C</span>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
+                                <span>+ 2</span>
+                            </item>
+                            <item>
+                                <span>${data[4].temp} C</span>
+                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
+                                <span>+ 3</span>
+                            </item>
+                        </scroll-flex>
+                    </wrapped-sections>
+                    <button-grid>
+                        <input type="button" value="close" style="font-weight: 600;">
+                        <input type="button" value="reset" style="font-weight: 600;">
+                    </button-grid>
+                    `
+                document.querySelector("#cardinfo").innerHTML = card;
             }
         });
 
-        xhr.open("GET", `./getweather?lat=${lat()}&long=${lng()}`);
-
+        let thislat = lat();
+        let thislng = lng();
+        xhr.open("get", `./getweather?lat=${thislat}&long=${thislng}`);
 
         xhr.send(data);
     }
-
-    
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy1YJbwCvAxZJTwxq3Qw_j8BIb2DGXSNM&libraries=places"></script>
 
