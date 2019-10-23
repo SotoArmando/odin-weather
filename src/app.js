@@ -28,9 +28,10 @@ app.get('/getweather', function(req, res) {
             return res.json()
         })
         .then((json) => {
-            
             res.send(json);
-        });
+        }).catch(function(err) {
+            res.send("CODE RED ALL GONE WRONG. STAY BACK!");
+        }); ;
 
 
 

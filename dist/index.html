@@ -17,49 +17,7 @@
             <card-wrapper style="position: relative;">
                 <card id="cardinfo" style="margin-left: 3em;">
                     <label>Odin-Weather</label><br>
-                    <title>30 C 31 / 23</title><br>
-                    <label>Octubre 11, 2019</label><br>
-                    <label>Santo Domingo</label><br>
-                    <label>Clear sky</label><br>
-                    <title>Today - Moderate rain. Hight 31 C low 24 C, Wind southwest at 4 mph. Chance of precipitation 85%
-                    </title><br>
-
-                    <wrapped-sections style="position: relative;">
-
-                        <scroll-flex id="firstfivedays" class="active" style="pointer-events: all;">
-                            <item>
-                                <span>30 C</span>
-                                <span style="margin:1rem 0;;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>6 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>7 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>8 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>9 AM</span>
-                            </item>
-                            <item>
-                                <span>30 C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>10 AM</span>
-                            </item>
-                        </scroll-flex>
-
-                    </wrapped-sections>
-
-                    <button-grid>
-                        <input type="button" value="close" style="font-weight: 600;">
-                        <input type="button" value="reset" style="font-weight: 600;">
-                    </button-grid>
+                    <title>Type a place and click on it when it appears on search results.</title>
 
                 </card>
 
@@ -92,7 +50,7 @@
         <content id="ux1" style="justify-content: flex-start;flex-direction: column;">
             <card style="max-width: 20rem;min-width: 20rem;min-height: 2em !important;max-height: 2em !important;align-self: center;margin-bottom: 0;">
 
-                <input placeholder="Type any place" value="Dominican" minlength="5" maxlength="20" type="text" style='pointer-events: all;' required="required">
+                <input placeholder="Type any place" value="" minlength="5" maxlength="20" type="text" style='pointer-events: all;' required="required">
             </card>
             <card class="search-results active">
                 <state class="ready active">
@@ -139,10 +97,7 @@
 </body>
 
 
-<script>
-</script>
-
-<script type="text/javascript">
+<script type="text/javascript" src="./main.js">
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy1YJbwCvAxZJTwxq3Qw_j8BIb2DGXSNM&libraries=places"></script>

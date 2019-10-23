@@ -11,9 +11,10 @@
     let initialindex = 0;
     let placeselected = "";
     let list = document.querySelectorAll('wrapped-sections > scroll-flex');
+    let fahrenheit = false;
+    let lastrequest = undefined;
 
-
-
+    
 
     const nextSectionWeather = () => {
         initialindex += 1;
@@ -43,24 +44,42 @@
         });
     }
 
-    function cToF(celsius) 
+    const cToF = (celsius) => 
     {
         let cTemp = celsius;
         let cToFahr = cTemp * 9 / 5 + 32;
-        
-            
+        return cToFahr;
     }
 
-    function fToC(fahrenheit) 
+    const fToC = (fahrenheit) =>
     {
         let fTemp = fahrenheit;
         let fToCel = (fTemp - 32) * 5 / 9;
               
     } 
 
-    const codeAddress = (place_id) => {
+    const toggleFahrenheit = () => { 
+        
+        fahrenheit = !fahrenheit; 
+
+        if (fahrenheit) {
+            document.querySelector("#togglecf").setAttribute("value","Fahrenheit")
+        } else {
+            document.querySelector("#togglecf").setAttribute("value","Celsius")
+        }
+
+        if (lastrequest) {
+            codeAddress(lastrequest)
+        }
+        
+        
+    }
+    
+    const codeAddress = (place_id) => 
+    {
+        lastrequest = place_id;
         document.querySelector("#loadingsvg").classList.remove('hidden');
-        document.querySelector(".search-results").classList.toggle("active");
+        document.querySelector(".search-results").classList.add("active");
 
         geocoder.geocode({
             placeId: place_id
@@ -166,71 +185,92 @@
     }
 
     const fetchWeather = ({
-        lat,
-        lng
-    }) => {
-        let data = null;
-        let xhr = new XMLHttpRequest();
-
-        xhr.addEventListener("readystatechange", () => {
-
-            if (this.readyState === this.DONE) {
-           
-                let data = JSON.parse(this.responseText).data;
-
-
-                let card = `
-                    <label>Odin-Weather</label><br>
-                    <title>${data[0].temp} ${data[0].max_temp} C / ${data[0].low_temp} C</title><br>
-                    <label>${data[0].valid_date}</label><br>
-                    <label>${placeselected}</label><br>
-                    <label>${data[0].weather.description}</label><br>
-                    <title>Today - ${data[0].weather.description}. Hight ${data[0].max_temp} C low ${data[0].low_temp} C, ${data[0].weather.description}.</title><br>
-
-                    <wrapped-sections style="position: relative;">
-
-                        <scroll-flex id="firstfivedays" class="active" style="pointer-events: all;">
-                            <item>
-                                <span>${data[0].temp} C</span>
-                                <span style="margin:1rem 0;;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>Today</span>
-                            </item>
-                            <item>
-                                <span>${data[1].temp} C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>Tomorrow</span>
-                            </item>
-                            <item>
-                                <span>${data[2].temp} C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>+ 1</span>
-                            </item>
-                            <item>
-                                <span>${data[3].temp} C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>+ 2</span>
-                            </item>
-                            <item>
-                                <span>${data[4].temp} C</span>
-                                <span style="margin:1rem 0;align-self: center;;display: flex;width:1.5rem;height:1.5rem;background: red;border-radius: 2rem;"></span>
-                                <span>+ 3</span>
-                            </item>
-                        </scroll-flex>
-                    </wrapped-sections>
-                    <button-grid>
-                        <input type="button" value="close" style="font-weight: 600;">
-                        <input type="button" value="reset" style="font-weight: 600;">
-                    </button-grid>
-                    `
-                document.querySelector("#cardinfo").innerHTML = card;
-            }
-        });
+            lat,
+            lng
+        }) => {
 
         let thislat = lat();
         let thislng = lng();
-        xhr.open("get", `./getweather?lat=${thislat}&long=${thislng}`);
 
-        xhr.send(data);
+        let allOk = false;
+
+        fetch(`./getweather?lat=${thislat}&long=${thislng}`)
+        .then(response=>response.json())
+        .then(response => { 
+            allOk = true;
+            let data = response.data;
+            let metric = (fahrenheit) ? "F" : "C";
+            let metric1 = (fahrenheit) ? "Fahrenheit" : "Celsius";
+
+            if (fahrenheit) {
+                data[0].temp = parseInt(cToF(data[0].temp))
+                data[0].max_temp = parseInt(cToF(data[0].max_temp))
+                data[0].low_temp = parseInt(cToF(data[0].low_temp))
+                data[1].temp = parseInt(cToF(data[1].temp))
+                data[2].temp = parseInt(cToF(data[2].temp))
+                data[3].temp = parseInt(cToF(data[3].temp))
+                data[4].temp = parseInt(cToF(data[4].temp))
+            }
+
+            let card = `
+                <label>Odin-Weather</label><br>
+                <title>${data[0].temp} ${data[0].max_temp} ${metric} / ${data[0].low_temp} ${metric}</title><br>
+                <label>${data[0].valid_date}</label><br>
+                <label>${placeselected}</label><br>
+                <label>${data[0].weather.description}</label><br>
+                <title>Today - ${data[0].weather.description}. Hight ${data[0].max_temp} ${metric} low ${data[0].low_temp} ${metric}, ${data[0].weather.description}.</title><br>
+
+                <wrapped-sections style="position: relative;">
+
+                    <scroll-flex id="firstfivedays" class="active" style="pointer-events: all;">
+                        <item>
+                            <span>${data[0].temp} ${metric}</span>
+
+                            <span>Today</span>
+                        </item>
+                        <item>
+                            <span>${data[1].temp} ${metric}</span>
+
+                            <span>Tomorrow</span>
+                        </item>
+                        <item>
+                            <span>${data[2].temp} ${metric}</span>
+
+                            <span>+ 1</span>
+                        </item>
+                        <item>
+                            <span>${data[3].temp} ${metric}</span>
+
+                            <span>+ 2</span>
+                        </item>
+                        <item>
+                            <span>${data[4].temp} ${metric}</span>
+
+                            <span>+ 3</span>
+                        </item>
+                    </scroll-flex>
+                </wrapped-sections>
+                <button-grid style="pointer-events: all;pointer-events: all;
+                cursor: pointer;">
+                    <input id="togglecf" type="button" value="${metric1}" style="font-weight: 600;font-weight: 600;
+                    border: 1px solid rgba(0,0,0,.20);
+                    width: 100%;">
+                </button-grid>
+                `
+
+            debugger;
+            document.querySelector("#cardinfo").innerHTML = card;
+
+            document.querySelector("#togglecf").addEventListener('click', toggleFahrenheit);
+        })
+        .catch(function(err) {
+            allOk = false;
+        }); 
+            
+          
+     
+
+
     }
 
     window.onload = () => {
