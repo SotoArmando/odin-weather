@@ -7,6 +7,7 @@ linters:
         ignore: 'order-alphabetical,box-sizing'
 files:
     ignore:
+        - 'node_modules/*'
         - 'src/generated/*'
         - 'src/public/main.js'
         - 'dist/main.js'
