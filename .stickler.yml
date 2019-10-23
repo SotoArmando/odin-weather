@@ -7,5 +7,9 @@ linters:
         ignore: 'order-alphabetical,box-sizing'
 files:
     ignore:
+        - 'node_modules/*'
         - 'src/generated/*'
-        - 'webroot/bower_components/*'
+        - 'src/public/main.js'
+        - 'dist/main.js'
+
+

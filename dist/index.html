@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta nAMe="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Odin-Weather</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="map"></div>
+    <content-wrapper style="pointer-events: none;">
+        <content id="ux">
+            <card-wrapper style="position: relative;">
+                <card id="cardinfo" style="margin-left: 3em;">
+                    <label>Odin-Weather</label><br>
+                    <title>Type a place and click on it when it appears on search results.</title>
+
+                </card>
+
+                <card id="loadingsvg" class="hidden" style="position: absolute;right:0;bottom: 0;">
+                    <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+                          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+                          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+                        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+                          C22.32,8.481,24.301,9.057,26.013,10.047z">
+                          <animateTransform attributeType="xml"
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 20 20"
+                            to="360 20 20"
+                            dur="0.5s"
+                            repeatCount="indefinite"/>
+                          </path>
+                        </svg>
+                </card>
+            </card-wrapper>
+        </content>
+
+    </content-wrapper>
+    <content-wrapper style="pointer-events: none;">
+
+        <content id="ux1" style="justify-content: flex-start;flex-direction: column;">
+            <card style="max-width: 20rem;min-width: 20rem;min-height: 2em !important;max-height: 2em !important;align-self: center;margin-bottom: 0;">
+
+                <input placeholder="Type any place" value="" minlength="5" maxlength="20" type="text" style='pointer-events: all;' required="required">
+            </card>
+            <card class="search-results active">
+                <state class="ready active">
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                    <item style="display: flex;flex-direction: column;    padding: .5em .5em;
+                        border-bottom: 1px solid rgba(0,0,0,.10);">
+                        <title>Titulo</title>
+                        <span>Country - State</span>
+                    </item>
+                </state>
+                <state class="loading" style="text-align: center;font-weight: 500;transition-duration: 355ms;">
+                    Loading
+                </state>
+
+            </card>
+
+
+        </content>
+    </content-wrapper>
+</body>
+
+
+<script type="text/javascript" src="./main.js">
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy1YJbwCvAxZJTwxq3Qw_j8BIb2DGXSNM&libraries=places"></script>
+
+
+
+
+
+
+
+
+</html>
