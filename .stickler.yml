@@ -8,4 +8,6 @@ linters:
 files:
     ignore:
         - 'src/generated/*'
+        - 'src/public/main.js'
+        - 'dist/main.js'
         - 'webroot/bower_components/*'
