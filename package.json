@@ -5,7 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development --watch",
-    "release": "webpack --mode=production"
+    "release": "webpack --mode=production",
+    "start": "node --experimental-modules app.mjs"
+  },
+  "engines": {
+    "node": "10.x"
   },
   "repository": {
     "type": "git",
