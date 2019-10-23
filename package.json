@@ -1,5 +1,5 @@
 {
-  "name": "nextlife",
+  "name": "odin-weather",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SotoArmando/Nextlife.git"
+    "url": "git+https://github.com/SotoArmando/odin-weather.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SotoArmando/Nextlife/issues"
+    "url": "https://github.com/SotoArmando/odin-weather/issues"
   },
-  "homepage": "https://github.com/SotoArmando/Nextlife#readme",
+  "homepage": "https://github.com/SotoArmando/odin-weather#readme",
   "devDependencies": {
     "css-loader": "^3.2.0",
     "node-sass": "^4.12.0",
