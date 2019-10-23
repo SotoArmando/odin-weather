@@ -9,7 +9,7 @@
   - Track Weather Status from Today plus Week
   - Toggle Celsius and Farenheit metrics
   
-## Tecnologies
+## Technologies
   - Fetch (Client Side)
     - Google Places API
     - Google Geocode API
