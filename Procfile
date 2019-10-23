@@ -1,1 +1,1 @@
-web: node --experimental-modules app.mjs
+web: node --experimental-modules src/app.mjs
