@@ -1,5 +1,7 @@
-    var map = undefined;
-    var geocoder = undefined;
+    import './sass/app.module.scss'
+    
+    let map = undefined;
+    let geocoder = undefined;
     let userinput = document.querySelector("input[placeholder='Type any place']");
     let cardsstateready = document.querySelector("card.search-results.active");
     let thereisarequest = false;
@@ -7,9 +9,9 @@
     let initialized = false;
     let resultscontainer = document.querySelector("card > state.ready");
     let initialindex = 0;
-    var placeselected = "";
-    var list = document.querySelectorAll('wrapped-sections > scroll-flex');
-    var map;
+    let placeselected = "";
+    let list = document.querySelectorAll('wrapped-sections > scroll-flex');
+
 
 
 
@@ -41,6 +43,21 @@
         });
     }
 
+    function cToF(celsius) 
+    {
+        let cTemp = celsius;
+        let cToFahr = cTemp * 9 / 5 + 32;
+        
+            
+    }
+
+    function fToC(fahrenheit) 
+    {
+        let fTemp = fahrenheit;
+        let fToCel = (fTemp - 32) * 5 / 9;
+              
+    } 
+
     const codeAddress = (place_id) => {
         document.querySelector("#loadingsvg").classList.remove('hidden');
         document.querySelector(".search-results").classList.toggle("active");
@@ -51,7 +68,7 @@
             if (status == 'OK') {
                 map.setCenter(results[0].geometry.location);
                 fetchWeather(results[0].geometry.location);
-                var marker = new google.maps.Marker({
+                let marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
@@ -142,7 +159,7 @@
         };
         if (userinput.checkValidity() && !thereisarequest) {
             let text = userinput.value;
-            var autocompleted = new google.maps.places.Autocomplete(userinput, options);
+            let autocompleted = new google.maps.places.Autocomplete(userinput, options);
 
         }
 
@@ -152,8 +169,8 @@
         lat,
         lng
     }) => {
-        var data = null;
-        var xhr = new XMLHttpRequest();
+        let data = null;
+        let xhr = new XMLHttpRequest();
 
         xhr.addEventListener("readystatechange", () => {
 

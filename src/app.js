@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-var app = express();
-app.use(bodyParser.json())
 const unirest = require("unirest");
 const fetch = require('node-fetch');
 const path = require('path');
+
+var app = express();
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 app.get('/', function(req, res) {
