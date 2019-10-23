@@ -31,7 +31,7 @@ app.get('/getweather', function(req, res) {
             res.send(json);
         }).catch(function(err) {
             res.send("CODE RED ALL GONE WRONG. STAY BACK!");
-        }); ;
+        }); ;   
 
 
 
