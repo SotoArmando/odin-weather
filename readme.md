@@ -27,6 +27,12 @@
   
 ## Instructions First Usage
 
+  - required Node JS =>  https://nodejs.org/en/
+  - git clone https://github.com/SotoArmando/odin-weather
+  - cd odin-weather
+  - node --experimental-modules src/app.mjs
+  - go to on your browser http://127.0.0.1:3000
+
 Once you access the [live](heroku.com) link. type the place where you want know the weather and click on the result on the results list. the map will show up its position on it also a card will be shown up with all the weather info.
 
 ![Alt text](doc/png1.png?raw=true "Screenshot 1")
