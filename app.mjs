@@ -9,10 +9,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let app = express();
 app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './src/public')));
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../dist/index.html'));
+    res.sendFile(path.join(__dirname + './dist/index.html'));
 });
 
 app.get('/getweather', function(req, res) {
