@@ -4,12 +4,12 @@
 ### Here [Live](heroku.com)
 
 
-Features
+## Features
   - Search for places
   - Track Weather Status from Today plus Week
   - Toggle Celsius and Farenheit metrics
   
-Tecnologies
+## Tecnologies
   - Fetch (Client Side)
     - Google Places API
     - Google Geocode API
