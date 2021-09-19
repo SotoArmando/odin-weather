@@ -1,4 +1,5 @@
 import { getResults, initMapGeocoder } from './fetch';
+import '../css/main.css';
 
 function Setup() {
   initMapGeocoder();

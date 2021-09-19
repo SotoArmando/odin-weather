@@ -3,10 +3,7 @@ import fetch from 'node-fetch';
 import path from 'path';
 
 const app = express();
-app.use(express.static(path.join(process.cwd(), '/dist')));
-app.use(express.static(path.join(process.cwd(), '/dist/public/css')));
-app.use(express.static(path.join(process.cwd(), '/dist/public/png')));
-app.use(express.static(path.join(process.cwd(), '/dist/public/svg')));
+app.use('/static/', express.static(path.join(process.cwd(), '/dist')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(process.cwd(), '/dist/index.html'));
@@ -29,5 +26,5 @@ app.get('/getweather', (req, res) => {
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
-  console.log(`Find me running at 0.0.0.0${process.env.PORT || 3000}`);
+  console.log(`Find me running at 0.0.0.0:${process.env.PORT || 3000}`);
 });
