@@ -1,112 +1,45 @@
+/* eslint-disable no-undef */
+import { cToF } from './translator';
+// eslint-disable-next-line import/no-cycle
+import {
+  displaySuggestions, toggleFahrenheit, toggleSearchResults,
+  userinput, fahrenheit, resultscontainer, placeselected,
+} from './dom';
 
-import { cToF, fToC } from './translator'
-import { displaySuggestions, toggleFahrenheit, toggleSearchResults, userinput, fahrenheit, resultscontainer, placeselected } from './dom'
+let service;
+// eslint-disable-next-line import/no-mutable-exports
+let lastrequest;
+let map;
+let geocoder;
 
-let service = undefined;
-let lastrequest = undefined;
-let map = undefined;
-let geocoder = undefined;
-
-let thereisarequest = false;
-let initialized = false;
-
-
-function initMapGeocoder() {
-    geocoder = new google.maps.Geocoder();
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: -34.397,
-            lng: 150.644
-        },
-        zoom: 8,
-        disableDefaultUI: true
-    });
-}
-function codeAddress (place_id) 
-{
-    lastrequest = place_id;
-    document.querySelector("#loadingsvg").classList.remove('hidden');
-    document.querySelector(".search-results").classList.add("active");
-
-    geocoder.geocode({
-        placeId: place_id
-    }, function(results, status) {
-        if (status == 'OK') {
-            map.setCenter(results[0].geometry.location);
-            fetchWeather(results[0].geometry.location);
-            let marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location
-            });
-            document.querySelector("#loadingsvg").classList.add('hidden');
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-        }
-    });
-}
-
-function getResults() {
-    toggleSearchResults();
-    resultscontainer.innerHTML = "";
-    if (initialized) {
-        service.getQueryPredictions({
-            input: userinput.value
-        }, displaySuggestions);
-    } else {
-        service = new google.maps.places.AutocompleteService();
-        service.getQueryPredictions({
-            input: userinput.value
-        }, displaySuggestions);
-    }
-}
-
-function autoComplete() {
-    let defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-33.8902, 151.1759),
-        new google.maps.LatLng(-33.8474, 151.2631));
-
-    let input = document.getElementById('searchTextField');
-    let options = {
-        bounds: defaultBounds,
-        types: ['establishment']
-    };
-    if (userinput.checkValidity() && !thereisarequest) {
-        let text = userinput.value;
-        let autocompleted = new google.maps.places.Autocomplete(userinput, options);
-
-    }
-
-}
-
-function fetchWeather({
-    lat,
-    lng
+const thereisarequest = false;
+const initialized = false;
+function FetchWeather({
+  lat,
+  lng,
 }) {
+  const thislat = lat();
+  const thislng = lng();
 
-    let thislat = lat();
-    let thislng = lng();
+  fetch(`./getweather?lat=${thislat}&long=${thislng}`)
+    .then((response) => response.json())
+    .then((response) => {
+      allOk = true;
+      const { data } = response;
+      const metric = (fahrenheit) ? 'F' : 'C';
+      const metric1 = (fahrenheit) ? 'Fahrenheit' : 'Celsius';
 
-    let allOk = false;
+      if (fahrenheit) {
+        data[0].temp = parseInt(cToF(data[0].temp), 10);
+        data[0].max_temp = parseInt(cToF(data[0].max_temp), 10);
+        data[0].low_temp = parseInt(cToF(data[0].low_temp), 10);
+        data[1].temp = parseInt(cToF(data[1].temp), 10);
+        data[2].temp = parseInt(cToF(data[2].temp), 10);
+        data[3].temp = parseInt(cToF(data[3].temp), 10);
+        data[4].temp = parseInt(cToF(data[4].temp), 10);
+      }
 
-    fetch(`./getweather?lat=${thislat}&long=${thislng}`)
-        .then(response => response.json())
-        .then(response => {
-            allOk = true;
-            let data = response.data;
-            let metric = (fahrenheit) ? "F" : "C";
-            let metric1 = (fahrenheit) ? "Fahrenheit" : "Celsius";
-
-            if (fahrenheit) {
-                data[0].temp = parseInt(cToF(data[0].temp))
-                data[0].max_temp = parseInt(cToF(data[0].max_temp))
-                data[0].low_temp = parseInt(cToF(data[0].low_temp))
-                data[1].temp = parseInt(cToF(data[1].temp))
-                data[2].temp = parseInt(cToF(data[2].temp))
-                data[3].temp = parseInt(cToF(data[3].temp))
-                data[4].temp = parseInt(cToF(data[4].temp))
-            }
-
-            let card = `
+      const card = `
                 <label>Odin-Weather</label><br>
                 <title>${data[0].temp} ${data[0].max_temp} ${metric} / ${data[0].low_temp} ${metric}</title><br>
                 <label>${data[0].valid_date}</label><br>
@@ -150,22 +83,81 @@ function fetchWeather({
                     border: 1px solid rgba(0,0,0,.20);
                     width: 100%;">
                 </button-grid>
-                `
+                `;
 
-            debugger;
-            document.querySelector("#cardinfo").innerHTML = card;
+      document.querySelector('#cardinfo').innerHTML = card;
 
-            document.querySelector("#togglecf").addEventListener('click', toggleFahrenheit);
-        })
-        .catch(function(err) {
-            allOk = false;
-            throw err;
-        });
+      document.querySelector('#togglecf').addEventListener('click', toggleFahrenheit);
+    })
+    .catch((err) => {
+      allOk = false;
+      throw err;
+    });
+}
+function initMapGeocoder() {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: -34.397,
+      lng: 150.644,
+    },
+    zoom: 8,
+    disableDefaultUI: true,
+  });
+}
+function codeAddress(Placeid) {
+  lastrequest = Placeid;
+  document.querySelector('#loadingsvg').classList.remove('hidden');
+  document.querySelector('.search-results').classList.add('active');
 
+  geocoder.geocode({
+    placeId: Placeid,
+  }, (results, status) => {
+    if (status === 'OK') {
+      map.setCenter(results[0].geometry.location);
 
+      FetchWeather(results[0].geometry.location);
 
-
-
+      document.querySelector('#loadingsvg').classList.add('hidden');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert(`Geocode was not successful for the following reason: ${status}`);
+    }
+  });
 }
 
-export { getResults, autoComplete, fetchWeather, codeAddress, initMapGeocoder, lastrequest }
+function getResults() {
+  toggleSearchResults();
+  resultscontainer.innerHTML = '';
+  if (initialized) {
+    service.getQueryPredictions({
+      input: userinput.value,
+    }, displaySuggestions);
+  } else {
+    service = new google.maps.places.AutocompleteService();
+    service.getQueryPredictions({
+      input: userinput.value,
+    }, displaySuggestions);
+  }
+}
+
+function autoComplete() {
+  // const defaultBounds = new google.maps.LatLngBounds(
+  //   new google.maps.LatLng(-33.8902, 151.1759),
+  //   new google.maps.LatLng(-33.8474, 151.2631),
+  // );
+
+  // const input = document.getElementById('searchTextField');
+  // const options = {
+  //   bounds: defaultBounds,
+  //   types: ['establishment'],
+  // };
+  if (userinput.checkValidity() && !thereisarequest) {
+    // const text = userinput.value;
+    // const autocompleted = new google.maps.places.Autocomplete(userinput, options);
+  }
+}
+
+export {
+  getResults, autoComplete, FetchWeather as fetchWeather, codeAddress, initMapGeocoder, lastrequest,
+};

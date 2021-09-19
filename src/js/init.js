@@ -1,17 +1,16 @@
-import { getResults, initMapGeocoder } from './fetch'
-
+import { getResults, initMapGeocoder } from './fetch';
 
 function Setup() {
-    initMapGeocoder();
+  initMapGeocoder();
 
-    document.querySelector("input[placeholder='Type any place']").addEventListener('keyup', () => {
-        if (document.querySelector("input[placeholder='Type any place']").checkValidity()) {
-            document.querySelector(".search-results").classList.remove("active");
-            getResults()
-        } else {
-            document.querySelector(".search-results").classList.add("active");
-        }
-    })
+  document.querySelector("input[placeholder='Type any place']").addEventListener('keyup', () => {
+    if (document.querySelector("input[placeholder='Type any place']").checkValidity()) {
+      document.querySelector('.search-results').classList.remove('active');
+      getResults();
+    } else {
+      document.querySelector('.search-results').classList.add('active');
+    }
+  });
 }
 
-export { Setup }
+export default Setup;

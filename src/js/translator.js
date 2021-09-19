@@ -1,14 +1,13 @@
-function cToF(celsius)
-{
-    let cTemp = celsius;
-    let cToFahr = cTemp * 9 / 5 + 32;
-    return cToFahr;
+function cToF(celsius) {
+  const cTemp = celsius;
+  const cToFahr = (cTemp * 9) / 5 + 32;
+  return cToFahr;
 }
 
-function fToC(fahrenheit)
-{
-    let fTemp = fahrenheit;
-    let fToCel = (fTemp - 32) * 5 / 9;
-} 
+function fToC(fahrenheit) {
+  const fTemp = fahrenheit;
+  const fToCel = ((fTemp - 32) * 5) / 9;
+  return fToCel;
+}
 
-export { cToF , fToC }
+export { cToF, fToC };
