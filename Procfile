@@ -1,1 +1,1 @@
-web: node --experimental-modules src/app.mjs
+web: node dist/bundle.js 
