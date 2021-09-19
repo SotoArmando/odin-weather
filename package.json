@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=development --watch",
+    "build": "webpack --mode=development",
     "release": "webpack --mode=production",
     "start": "node dist/bundle.js"
   },
