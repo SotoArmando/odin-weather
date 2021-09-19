@@ -4,6 +4,9 @@ import path from 'path';
 
 const app = express();
 app.use(express.static(path.join(process.cwd(), '/dist')));
+app.use(express.static(path.join(process.cwd(), '/dist/public/css')));
+app.use(express.static(path.join(process.cwd(), '/dist/public/png')));
+app.use(express.static(path.join(process.cwd(), '/dist/public/svg')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(process.cwd(), '/dist/index.html'));
