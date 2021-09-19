@@ -26,5 +26,5 @@ app.get('/getweather', (req, res) => {
 
 app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
-  console.log('Find me running at 127.0.0.1:3000');
+  console.log(`Find me running at 0.0.0.0${process.env.PORT || 3000}`);
 });
