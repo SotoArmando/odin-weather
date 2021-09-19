@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import axios from 'axios';
 import { cToF } from './translator';
 // eslint-disable-next-line import/no-cycle
 import {
@@ -12,8 +13,8 @@ let lastrequest;
 let map;
 let geocoder;
 
-const thereisarequest = false;
-const initialized = false;
+let thereisarequest = false;
+
 function FetchWeather({
   lat,
   lng,
@@ -95,6 +96,7 @@ function FetchWeather({
     });
 }
 function initMapGeocoder() {
+  debugger;
   geocoder = new google.maps.Geocoder();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
@@ -129,15 +131,25 @@ function codeAddress(Placeid) {
 function getResults() {
   toggleSearchResults();
   resultscontainer.innerHTML = '';
-  if (initialized) {
-    service.getQueryPredictions({
-      input: userinput.value,
-    }, displaySuggestions);
-  } else {
-    service = new google.maps.places.AutocompleteService();
-    service.getQueryPredictions({
-      input: userinput.value,
-    }, displaySuggestions);
+  if (userinput.checkValidity() && !thereisarequest) {
+    thereisarequest = true;
+    const config = {
+      method: 'get',
+      url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(userinput.value)}&language=fr&key=AIzaSyB2Z8B9-_XCwO3_lOlV13b3Er5C85JrL6U`,
+      headers: { },
+    };
+
+    axios(config)
+      .then((response) => {
+        debugger;
+        displaySuggestions(JSON.stringify(response.data));
+        console.log(JSON.stringify(response.data));
+        thereisarequest = false;
+      })
+      .catch((error) => {
+        console.log(error);
+        thereisarequest = false;
+      });
   }
 }
 

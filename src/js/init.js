@@ -2,7 +2,6 @@ import { getResults, initMapGeocoder } from './fetch';
 
 function Setup() {
   initMapGeocoder();
-
   document.querySelector("input[placeholder='Type any place']").addEventListener('keyup', () => {
     if (document.querySelector("input[placeholder='Type any place']").checkValidity()) {
       document.querySelector('.search-results').classList.remove('active');
@@ -13,4 +12,6 @@ function Setup() {
   });
 }
 
-export default Setup;
+window.onload = () => {
+  Setup();
+};

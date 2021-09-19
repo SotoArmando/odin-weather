@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1407,18 +1407,18 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"./node_modules/express/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! body-parser */ \"./node_modules/body-parser/index.js\");\n/* harmony import */ var body_parser__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(body_parser__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! node-fetch */ \"./node_modules/node-fetch/lib/index.mjs\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./sass/main.scss */ \"./src/sass/main.scss\");\n/* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_sass_main_scss__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\n\nlet app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use(body_parser__WEBPACK_IMPORTED_MODULE_1___default.a.json())\napp.use(express__WEBPACK_IMPORTED_MODULE_0___default.a.static(path__WEBPACK_IMPORTED_MODULE_3___default.a.join(process.cwd(),'/dist')));\n\napp.get('/', function(req, res) {\n    res.sendFile(path__WEBPACK_IMPORTED_MODULE_3___default.a.join(process.cwd(),'/dist/index.html'));\n});\n\napp.get('/getweather', function(req, res) {\n\n    let url = `https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily?lang=eng&lat=${req.query[\"lat\"]}&lon=${req.query[\"long\"]}&hours=48`;\n    let headers = {\n        \"Content-Type\": \"application/json\",\n        \"x-rapidapi-host\": \"weatherbit-v1-mashape.p.rapidapi.com\",\n        \"x-rapidapi-key\": \"b7f80d2847msha3e556539a614c3p12cb51jsn29380fd29fa8\"\n    }\n\n    Object(node_fetch__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(url, { method: 'GET', headers: headers })\n        .then((res) => {\n            return res.json()\n        })\n        .then((json) => {\n            res.send(json);\n        }).catch(function(err) {\n            res.send(\"CODE RED ALL GONE WRONG. STAY BACK!\");\n        }); ;   \n\n\n\n});\n\napp.listen(3000, function() {\n    console.log(\"Find me running at 127.0.0.1:3000\")\n});\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"./node_modules/express/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var node_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! node-fetch */ \"./node_modules/node-fetch/lib/index.mjs\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nconst app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use(express__WEBPACK_IMPORTED_MODULE_0___default.a.static(path__WEBPACK_IMPORTED_MODULE_2___default.a.join(process.cwd(), '/dist')));\n\napp.get('/', (req, res) => {\n  res.sendFile(path__WEBPACK_IMPORTED_MODULE_2___default.a.join(process.cwd(), '/dist/index.html'));\n});\n\napp.get('/getweather', (req, res) => {\n  Object(node_fetch__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(`https://weatherbit-v1-mashape.p.rapidapi.com/forecast/daily?lat=${req.query.lat}&lon=${req.query.long}&hours=48`, {\n    method: 'GET',\n    headers: {\n      'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com',\n      'x-rapidapi-key': 'b7f80d2847msha3e556539a614c3p12cb51jsn29380fd29fa8',\n    },\n  }).then((res) => res.json())\n    .then((json) => {\n      res.send(json);\n    }).catch((err) => {\n      res.send({ body: `CODE RED ALL GONE WRONG. STAY BACK!${err}` });\n    });\n});\n\napp.listen(3000, () => {\n  // eslint-disable-next-line no-console\n  console.log('Find me running at 127.0.0.1:3000');\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
-/***/ "./src/sass/main.scss":
-/*!****************************!*\
-  !*** ./src/sass/main.scss ***!
-  \****************************/
+/***/ 0:
+/*!**************************!*\
+  !*** multi ./src/app.js ***!
+  \**************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module parse failed: Unexpected character '#' (2:4)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| \\n>     #map {\\n|         height: 100%;\\n|     }\");\n\n//# sourceURL=webpack:///./src/sass/main.scss?");
+eval("module.exports = __webpack_require__(/*! ./src/app.js */\"./src/app.js\");\n\n\n//# sourceURL=webpack:///multi_./src/app.js?");
 
 /***/ }),
 
