@@ -9,7 +9,8 @@
     "start": "node dist/bundle.js"
   },
   "engines": {
-    "node": "10.x"
+    "node": "14.17.5",
+    "npm": "6.14.14"
   },
   "repository": {
     "type": "git",
