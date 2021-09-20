@@ -19,13 +19,13 @@ function FetchWeather({
   lat,
   lng,
 }) {
-  const thislat = lat();
-  const thislng = lng();
+  const thislat = lat;
+  const thislng = lng;
 
   fetch(`./getweather?lat=${thislat}&long=${thislng}`)
     .then((response) => response.json())
     .then((response) => {
-      allOk = true;
+      debugger;
       const { data } = response;
       const metric = (fahrenheit) ? 'F' : 'C';
       const metric1 = (fahrenheit) ? 'Fahrenheit' : 'Celsius';
@@ -91,12 +91,12 @@ function FetchWeather({
       document.querySelector('#togglecf').addEventListener('click', toggleFahrenheit);
     })
     .catch((err) => {
-      allOk = false;
+ 
       throw err;
     });
 }
 function initMapGeocoder() {
-  debugger;
+  
   geocoder = new google.maps.Geocoder();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
@@ -107,25 +107,14 @@ function initMapGeocoder() {
     disableDefaultUI: true,
   });
 }
-function codeAddress(Placeid) {
-  lastrequest = Placeid;
+function codeAddress([lon, lat]) {
+  
+  lastrequest = [lon, lat];
   document.querySelector('#loadingsvg').classList.remove('hidden');
   document.querySelector('.search-results').classList.add('active');
-
-  geocoder.geocode({
-    placeId: Placeid,
-  }, (results, status) => {
-    if (status === 'OK') {
-      map.setCenter(results[0].geometry.location);
-
-      FetchWeather(results[0].geometry.location);
-
-      document.querySelector('#loadingsvg').classList.add('hidden');
-    } else {
-      // eslint-disable-next-line no-alert
-      alert(`Geocode was not successful for the following reason: ${status}`);
-    }
-  });
+  map.setCenter({ lng: lon, lat });
+  FetchWeather({ lng: lon, lat });
+  document.querySelector('#loadingsvg').classList.add('hidden');
 }
 
 function getResults() {
@@ -133,23 +122,26 @@ function getResults() {
   resultscontainer.innerHTML = '';
   if (userinput.checkValidity() && !thereisarequest) {
     thereisarequest = true;
-    const config = {
-      method: 'get',
-      url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodeURIComponent(userinput.value)}&language=fr&key=AIzaSyB2Z8B9-_XCwO3_lOlV13b3Er5C85JrL6U`,
-      headers: { },
+    const options = {
+      method: 'GET',
+      url: 'https://geoapify-address-autocomplete.p.rapidapi.com/v1/geocode/autocomplete',
+      params: { text: userinput.value, type: 'country' },
+      headers: {
+        'x-rapidapi-host': 'geoapify-address-autocomplete.p.rapidapi.com',
+        'x-rapidapi-key': 'b7f80d2847msha3e556539a614c3p12cb51jsn29380fd29fa8',
+      },
     };
 
-    axios(config)
-      .then((response) => {
-        debugger;
-        displaySuggestions(JSON.stringify(response.data));
-        console.log(JSON.stringify(response.data));
-        thereisarequest = false;
-      })
-      .catch((error) => {
-        console.log(error);
-        thereisarequest = false;
-      });
+    axios.request(options).then((response) => {
+      
+      const { features } = response.data;
+      displaySuggestions(features);
+      console.log(JSON.stringify(response.data));
+      thereisarequest = false;
+    }).catch((error) => {
+      console.log(error);
+      thereisarequest = false;
+    });
   }
 }
 

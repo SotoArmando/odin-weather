@@ -14,28 +14,28 @@ function toggleSearchResults() {
   });
 }
 
-function displaySuggestions(predictions, status) {
+function displaySuggestions(predictions) {
   // eslint-disable-next-line no-undef
-  if (status !== google.maps.places.PlacesServiceStatus.OK) {
-    // eslint-disable-next-line no-alert
-    alert(status);
-    return;
-  }
-  predictions.forEach((prediction) => {
+
+  predictions.forEach(({
+    properties: {
+      name, lon, lat, result_type: Resulttype,
+    },
+  }) => {
     const item = document.createElement('item');
 
     item.addEventListener('click', () => {
-      placeselected = prediction.description;
-      codeAddress(prediction.place_id);
+      placeselected = name;
+      codeAddress([lon, lat]);
     });
 
     item.setAttribute('style', 'display: flex;flex-direction: column;padding: .5em .5em;border-bottom: 1px solid rgba(0,0,0,.10);');
 
     const itemtitle = document.createElement('title');
     const itemspan = document.createElement('span');
-    const { description, types: [type0] } = prediction;
-    itemtitle.innerHTML = description;
-    itemspan.innerHTML = type0;
+
+    itemtitle.innerHTML = name;
+    itemspan.innerHTML = Resulttype;
 
     item.appendChild(itemtitle);
     item.appendChild(itemspan);
