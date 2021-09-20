@@ -7,11 +7,9 @@ import {
   userinput, fahrenheit, resultscontainer, placeselected,
 } from './dom';
 
-let service;
 // eslint-disable-next-line import/no-mutable-exports
 let lastrequest;
 let map;
-let geocoder;
 
 let thereisarequest = false;
 
@@ -25,7 +23,6 @@ function FetchWeather({
   fetch(`./getweather?lat=${thislat}&long=${thislng}`)
     .then((response) => response.json())
     .then((response) => {
-      debugger;
       const { data } = response;
       const metric = (fahrenheit) ? 'F' : 'C';
       const metric1 = (fahrenheit) ? 'Fahrenheit' : 'Celsius';
@@ -91,13 +88,10 @@ function FetchWeather({
       document.querySelector('#togglecf').addEventListener('click', toggleFahrenheit);
     })
     .catch((err) => {
- 
       throw err;
     });
 }
 function initMapGeocoder() {
-  
-  geocoder = new google.maps.Geocoder();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: -34.397,
@@ -108,7 +102,6 @@ function initMapGeocoder() {
   });
 }
 function codeAddress([lon, lat]) {
-  
   lastrequest = [lon, lat];
   document.querySelector('#loadingsvg').classList.remove('hidden');
   document.querySelector('.search-results').classList.add('active');
@@ -133,13 +126,10 @@ function getResults() {
     };
 
     axios.request(options).then((response) => {
-      
       const { features } = response.data;
       displaySuggestions(features);
-      console.log(JSON.stringify(response.data));
       thereisarequest = false;
-    }).catch((error) => {
-      console.log(error);
+    }).catch(() => {
       thereisarequest = false;
     });
   }
