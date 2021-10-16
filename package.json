@@ -2,9 +2,12 @@
   "name": "odin-weather",
   "version": "1.0.0",
   "description": "",
+  "main":"dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node dist/bundle.js"
+    "build": "webpack --mode=development --watch",
+    "release": "webpack --mode=production",
+    "start": "node dist/bundle.js"
   },
   "engines": {
     "node": "14.17.5",
