@@ -2,10 +2,10 @@
   "name": "odin-weather",
   "version": "1.0.0",
   "description": "",
-  "main":"dist/bundle.js",
+  "main": "stylelint.config copy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=development --watch",
+    "build": "webpack --mode=development",
     "release": "webpack --mode=production",
     "start": "node dist/bundle.js"
   },
@@ -52,7 +52,6 @@
     "node-fetch": "^2.6.0",
     "unirest": "^0.6.0"
   },
-  "main": "stylelint.config copy.js",
   "directories": {
     "doc": "doc"
   }
