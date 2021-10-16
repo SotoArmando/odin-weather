@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=development --watch",
-    "release": "webpack --mode=production",
+    "build": "webpack --mode=production",
+    "develop": "webpack --mode=development --watch",
     "start": "node dist/bundle.js"
   },
   "engines": {
