@@ -121,7 +121,7 @@ function getResults() {
       params: { text: userinput.value, type: 'country' },
       headers: {
         'x-rapidapi-host': 'geoapify-address-autocomplete.p.rapidapi.com',
-        'x-rapidapi-key': 'b7f80d2847msha3e556539a614c3p12cb51jsn29380fd29fa8',
+        'x-rapidapi-key': 'd47e2c0a26msha5142819817b97bp1bce93jsne76fd5e28006',
       },
     };
 
