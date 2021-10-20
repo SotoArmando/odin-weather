@@ -1,7 +1,8 @@
 module.exports = {
   target: 'node',
   entry: [
-    './src/js/init.js'],
+    './src/js/init.js',
+  ],
   output: {
     filename: 'index.js',
   },

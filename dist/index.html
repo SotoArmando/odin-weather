@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta property="og:image" content="/static/public/png/weatherpreview.png">
@@ -10,16 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
     <link href="/static/public/css/main.css" rel="stylesheet" >
 </head>
-
 <body>
     <div id="map"></div>
     <content-wrapper style="pointer-events: none;">
         <content id="ux">
             <card-wrapper style="position: relative;">
-                <card id="cardinfo" style="margin-left: 3em;">
+                <card id="cardinfo" style="margin-left: 3em;margin-top: 20em;">
                     <label>Odin-Weather</label><br>
                     <title>Type a place and click on it when it appears on search results.</title>
-
                 </card>
 
                 <card id="loadingsvg" class="hidden" style="position: absolute;right:0;bottom: 0;">
@@ -88,8 +85,6 @@
                 </state>
 
             </card>
-
-
         </content>
     </content-wrapper>
 </body>
@@ -100,10 +95,4 @@
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Z8B9-_XCwO3_lOlV13b3Er5C85JrL6U&callback=Setup&v=weekly"
 async
 ></script>
-
-
-
-
-
-
 </html>
